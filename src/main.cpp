@@ -28,7 +28,6 @@ int main()
 	bst->Insert( No20 );
 	bst->Insert( No5 );
 	bst->Insert( No50 );
-	LOG_INFO(" %d ", bst->RootNode->LeftChild->Value );
 	/*
 	bst->Insert( No3 );
 	bst->Insert( No15 );
