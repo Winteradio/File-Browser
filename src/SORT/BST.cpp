@@ -41,73 +41,79 @@ void BST::Search( Node* node, TraversalType Type )
 {
 	switch( Type )
 	{
-		case INORDER : InorderTraversal( node );
+		case INORDER :
 		break;
 
-		case PREORDER : PreorderTraversal( node );
+		case PREORDER :
 		break;
 
-		case POSTORDER : PostorderTraversal( node );
+		case POSTORDER :
 		break;
 	};
 }
 
-void BST::InorderTraversal( Node* node )
+void BST::InorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
 {
 	if ( node->LeftChild != nullptr )
 	{
-		InorderTraversal( node->LeftChild );
+		InorderTraversal( node->LeftChild, Action );
 	}
 
 	Action( node );
 
 	if ( node->RightChild != nullptr )
 	{
-		InorderTraversal( node->RightChild );
+		InorderTraversal( node->RightChild, Action);
 	}
 }
 
-void BST::PreorderTraversal( Node* node )
+void BST::PreorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
 {
 	Action( node );
 
 	if ( node->LeftChild != nullptr )
 	{
-		PreorderTraversal( node->LeftChild );
+		PreorderTraversal( node->LeftChild, Action );
 	}
 
 	if ( node->RightChild != nullptr )
 	{
-		PreorderTraversal( node->RightChild );
+		PreorderTraversal( node->RightChild, Action );
 	}
 }
 
-void BST::PostorderTraversal( Node* node )
+void BST::PostorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
 {
 	if ( node->LeftChild != nullptr )
 	{
-		PostorderTraversal( node->LeftChild );
+		PostorderTraversal( node->LeftChild, Action );
 	}
 
 	if ( node->RightChild != nullptr )
 	{
-		PostorderTraversal( node->RightChild );
+		PostorderTraversal( node->RightChild, Action );
 	}
 
 	Action( node );
 }
 
-void BST::GetSuccesor()
+Node* BST::GetSuccesor( Node* node, Node* RootNode )
 {
-	
+	Node* Succesor;
+
+
+
+	return Succesor;
 }
 
-void BST::GetPredecessor()
+Node* BST::GetPredecessor( Node* node, Node* RootNode )
 {
-	
+	Node* Predecessor;
+
+	return Predecessor;
 }
 
-void BST::Action( Node* node )
+void BST::Print( Node* node )
 {
 	LOG_INFO(" %d ", node->Value );
 	Sleep( 100 );

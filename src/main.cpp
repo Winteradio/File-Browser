@@ -44,13 +44,13 @@ int main()
 	*/
 
 	LOG_INFO(" InorderTraversal ");
-	bst->InorderTraversal( No20 );
+	bst->InorderTraversal( No20, &(bst->Print) );
 
 	LOG_INFO(" PreorderTraversal ");
-	bst->PreorderTraversal( No20 );
+	bst->PreorderTraversal( No20, &(bst->Print) );
 
 	LOG_INFO(" PostorderTraversal ");
-	bst->PostorderTraversal( No20 );
+	bst->PostorderTraversal( No20, &(bst->Print) );
 
 	system("pause");
 	return 0;

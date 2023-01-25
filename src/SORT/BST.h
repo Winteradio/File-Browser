@@ -43,14 +43,14 @@ class BST
 		void Delete( Node* node );
 		void Search( Node* node, TraversalType Type );
 
-		void InorderTraversal( Node* node );
-		void PreorderTraversal( Node* node );
-		void PostorderTraversal( Node* node );
+		void InorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
+		void PreorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
+		void PostorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
 
-		void GetSuccesor();
-		void GetPredecessor();
+		Node* GetSuccesor( Node* node, Node* RootNode );
+		Node* GetPredecessor( Node* node, Node* RootNode );
 
-		void Action( Node* node );
+		void Print( Node* node );
 };
 
 #endif // __BST_H__
