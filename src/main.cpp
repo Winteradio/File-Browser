@@ -43,7 +43,14 @@ int main()
 	bst->Insert( No40 );
 	*/
 
+	LOG_INFO(" InorderTraversal ");
 	bst->InorderTraversal( No20 );
+
+	LOG_INFO(" PreorderTraversal ");
+	bst->PreorderTraversal( No20 );
+
+	LOG_INFO(" PostorderTraversal ");
+	bst->PostorderTraversal( No20 );
 
 	system("pause");
 	return 0;

@@ -1,4 +1,5 @@
 #include "BST.h"
+#include <windows.h>
 
 void BST::Insert( Node* ChildNode, Node* ParentNode )
 {
@@ -53,29 +54,47 @@ void BST::Search( Node* node, TraversalType Type )
 
 void BST::InorderTraversal( Node* node )
 {
-	Node* Temp = node;
 	if ( node->LeftChild != nullptr )
 	{
-		node = node->LeftChild;
-		InorderTraversal( node );
+		InorderTraversal( node->LeftChild );
 	}
 
-	node = Temp;
 	Action( node );
 
 	if ( node->RightChild != nullptr )
 	{
-		node = node->RightChild;
-		InorderTraversal( node );
+		InorderTraversal( node->RightChild );
 	}
 }
 
 void BST::PreorderTraversal( Node* node )
 {
+	Action( node );
+
+	if ( node->LeftChild != nullptr )
+	{
+		PreorderTraversal( node->LeftChild );
+	}
+
+	if ( node->RightChild != nullptr )
+	{
+		PreorderTraversal( node->RightChild );
+	}
 }
 
 void BST::PostorderTraversal( Node* node )
 {
+	if ( node->LeftChild != nullptr )
+	{
+		PostorderTraversal( node->LeftChild );
+	}
+
+	if ( node->RightChild != nullptr )
+	{
+		PostorderTraversal( node->RightChild );
+	}
+
+	Action( node );
 }
 
 void BST::GetSuccesor()
@@ -91,4 +110,5 @@ void BST::GetPredecessor()
 void BST::Action( Node* node )
 {
 	LOG_INFO(" %d ", node->Value );
+	Sleep( 100 );
 }
