@@ -4,8 +4,13 @@
 struct Node
 {
 	int Value = NULL;
-	Node* Left = nullptr;
-	Node* Right = nullptr;
+	Node* LeftChild = nullptr;
+	Node* RightChild = nullptr;
+
+	Node( int Value )
+	{
+		this->Value = Value;
+	}
 };
 
 #endif // __NODE_H__

@@ -5,6 +5,7 @@ Date :
 Desc :
 
 ## Type :
+## bug -  
 ## fix - 버그 수정
 ## dosc - 문서 수정
 ## test - 테스트 코드

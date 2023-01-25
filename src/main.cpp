@@ -7,36 +7,38 @@
 #include <iostream>
 #include <windows.h>
 
-namespace FS = std::filesystem;
+#include "BST.h"
 
 int main()
 {
-	FS::path Path("./../../");
+	Node* No20 = new Node(20);
+	Node* No5 = new Node(5);
+	Node* No3 = new Node(3);
+	Node* No15 = new Node(15);
+	Node* No10 = new Node(10);
+	Node* No17 = new Node(17);
+	Node* No50 = new Node(50);
+	Node* No30 = new Node(30);
+	Node* No40 = new Node(40);
 
-// Make Binary Search Tree
-/*
-	Concept : Every nodes are smaller thatn lefted nodes and bigger than righted nodes
+	Node* Cp40 = new Node(40);
 
-		BST's minimum is located left in tree
-		BST's Maximum is located right in tree
+	BST* bst = new BST;
 
-	Inorder Traversal : Start for root node
-		Traver recursive left sud-tree,
-		if sud-tree has not left sud-tree, visit this sud-tree,
-		action for nodes and,
-		traver recursive right sud-tree
-		-> Sequencial Visitive
+	bst->Insert( No20 );
+	bst->Insert( No5 );
+	bst->Insert( No50 );
+	LOG_INFO(" %d ", bst->RootNode->LeftChild->Value );
+	/*
+	bst->Insert( No3 );
+	bst->Insert( No15 );
+	bst->Insert( No17 );
+	bst->Insert( No30 );
+	bst->Insert( No40 );
+	*/
 
-	Preorder Traversal : Visit for root node
-		visit this node, action for this node,
-		traver recursive left sud-tree and,
-		traver recursive right sud-tree
+	bst->InorderTraversal( Cp40 );
 
-	Postorder Traversal : Traver for root node
-		Traver recursive left sud-tree,
-		traver recursive right sud-tree and,
-		visit this node, action for this node
-*/
 	system("pause");
 	return 0;
 }

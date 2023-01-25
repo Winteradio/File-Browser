@@ -60,6 +60,7 @@ MESSAGE( STATUS "Setting for Header Files" )
 
 SET( INCS
 	${COM_DIR}
+	${SORT_DIR}
 	${SUB_DIR}
 	)
 
