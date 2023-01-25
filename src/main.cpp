@@ -25,9 +25,16 @@ int main()
 
 	BST* bst = new BST;
 
-	bst->Insert( No20 );
-	bst->Insert( No5 );
-	bst->Insert( No50 );
+	bst->Insert( No20, nullptr );
+	bst->Insert( No5, No20 );
+	bst->Insert( No3, No20 );
+	bst->Insert( No50, No20 );
+	bst->Insert( No15, No20 );
+	bst->Insert( No10, No20 );
+	bst->Insert( No17, No20 );
+	bst->Insert( No30, No20 );
+	bst->Insert( No40, No20 );
+
 	/*
 	bst->Insert( No3 );
 	bst->Insert( No15 );
@@ -36,7 +43,7 @@ int main()
 	bst->Insert( No40 );
 	*/
 
-	bst->InorderTraversal( Cp40 );
+	bst->InorderTraversal( No20 );
 
 	system("pause");
 	return 0;

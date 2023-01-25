@@ -1,30 +1,33 @@
 #include "BST.h"
 
-void BST::Insert( Node* node )
+void BST::Insert( Node* ChildNode, Node* ParentNode )
 {
-	if ( RootNode == nullptr )
+	if ( ParentNode != nullptr )
 	{
-		RootNode = node;
-		LOG_INFO("%d", RootNode->Value );
-	}
-	else
-	{
-		Node* OriginNode = RootNode;
-
-		if ( node->Value <= RootNode->Value )
+		if ( ChildNode->Value <= ParentNode->Value )
 		{
-			RootNode = RootNode->LeftChild;
-			LOG_INFO(" Go to Left ");
-			Insert( node );
+			if ( ParentNode->LeftChild == nullptr )
+			{
+				ParentNode->LeftChild = ChildNode;
+			}
+			else
+			{
+				ParentNode = ParentNode->LeftChild;
+				Insert( ChildNode, ParentNode );
+			}
 		}
-		else if ( node->Value > RootNode->Value )
+		else if ( ChildNode->Value > ParentNode->Value )
 		{
-			RootNode = RootNode->RightChild;
-			LOG_INFO(" Go to Right ");
-			Insert( node );
+			if ( ParentNode->RightChild == nullptr )
+			{
+				ParentNode->RightChild = ChildNode;
+			}
+			else
+			{
+				ParentNode = ParentNode->RightChild;
+				Insert( ChildNode, ParentNode );
+			}
 		}
-
-		RootNode = OriginNode;
 	}
 }
 
@@ -50,26 +53,20 @@ void BST::Search( Node* node, TraversalType Type )
 
 void BST::InorderTraversal( Node* node )
 {
-	Node* pNode = RootNode;
-	if ( RootNode->LeftChild != nullptr )
+	Node* Temp = node;
+	if ( node->LeftChild != nullptr )
 	{
-		RootNode = RootNode->LeftChild;
+		node = node->LeftChild;
 		InorderTraversal( node );
 	}
-	else
-	{
-		RootNode = pNode;
-		Action( RootNode, node );
 
-		if ( RootNode->RightChild != nullptr )
-		{
-			RootNode = RootNode->RightChild;
-			InorderTraversal( node );
-		}
-		else
-		{
-			RootNode = pNode;
-		}
+	node = Temp;
+	Action( node );
+
+	if ( node->RightChild != nullptr )
+	{
+		node = node->RightChild;
+		InorderTraversal( node );
 	}
 }
 
@@ -91,16 +88,7 @@ void BST::GetPredecessor()
 	
 }
 
-void BST::Action( Node* OriginNode, Node* CompareNode )
+void BST::Action( Node* node )
 {
-	char Temp;
-	if ( OriginNode->Value == CompareNode->Value )
-	{
-		Temp = 'Y';
-	}
-	else
-	{
-		Temp = 'N';
-	}
-	LOG_INFO(" Value %d : // Same : %c", OriginNode->Value, Temp );
+	LOG_INFO(" %d ", node->Value );
 }

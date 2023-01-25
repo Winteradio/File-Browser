@@ -39,9 +39,7 @@ typedef enum TraversalType
 class BST
 {
 	public :
-		Node* RootNode = nullptr;
-
-		void Insert( Node* node );
+		void Insert( Node* ChildNode, Node* ParentNode );
 		void Delete( Node* node );
 		void Search( Node* node, TraversalType Type );
 
@@ -52,7 +50,7 @@ class BST
 		void GetSuccesor();
 		void GetPredecessor();
 
-		void Action( Node* OriginNode, Node* CompareNode );
+		void Action( Node* node );
 };
 
 #endif // __BST_H__
