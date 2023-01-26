@@ -156,7 +156,7 @@ void BST::CompareSuccessor( Node* node )
 	{
 		if ( SuccessorNode != nullptr )
 		{
-			if ( node->Value <= SuccessorNode->Value )
+			if ( node->Value < SuccessorNode->Value )
 			{
 				SuccessorNode = node;
 				Print( node );
@@ -176,7 +176,7 @@ void BST::ComparePredecessor( Node* node )
 	{
 		if ( PredecessorNode != nullptr )
 		{
-			if ( node->Value >= PredecessorNode->Value )
+			if ( node->Value > PredecessorNode->Value )
 			{
 				PredecessorNode = node;
 				Print( node );
