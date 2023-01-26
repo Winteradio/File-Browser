@@ -13,8 +13,7 @@ void BST::Insert( Node* ChildNode, Node* ParentNode )
 			}
 			else
 			{
-				ParentNode = ParentNode->LeftChild;
-				Insert( ChildNode, ParentNode );
+				Insert( ChildNode, ParentNode->LeftChild );
 			}
 		}
 		else if ( ChildNode->Value > ParentNode->Value )
@@ -25,8 +24,7 @@ void BST::Insert( Node* ChildNode, Node* ParentNode )
 			}
 			else
 			{
-				ParentNode = ParentNode->RightChild;
-				Insert( ChildNode, ParentNode );
+				Insert( ChildNode, ParentNode->RightChild );
 			}
 		}
 	}
@@ -52,7 +50,7 @@ void BST::Search( Node* node, TraversalType Type )
 	};
 }
 
-void BST::InorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
+void BST::InorderTraversal( Node* node, void (*Action)( Node* ) )
 {
 	if ( node->LeftChild != nullptr )
 	{
@@ -67,7 +65,7 @@ void BST::InorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
 	}
 }
 
-void BST::PreorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
+void BST::PreorderTraversal( Node* node, void (*Action)( Node* ) )
 {
 	Action( node );
 
@@ -82,7 +80,7 @@ void BST::PreorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
 	}
 }
 
-void BST::PostorderTraversal( Node* node, void (*Action)( Node* Actionnode) )
+void BST::PostorderTraversal( Node* node, void (*Action)( Node* ) )
 {
 	if ( node->LeftChild != nullptr )
 	{

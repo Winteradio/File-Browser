@@ -23,34 +23,33 @@ int main()
 
 	Node* Cp40 = new Node(40);
 
-	BST* bst = new BST;
-
-	bst->Insert( No20, nullptr );
-	bst->Insert( No5, No20 );
-	bst->Insert( No3, No20 );
-	bst->Insert( No50, No20 );
-	bst->Insert( No15, No20 );
-	bst->Insert( No10, No20 );
-	bst->Insert( No17, No20 );
-	bst->Insert( No30, No20 );
-	bst->Insert( No40, No20 );
+	BST::Insert( No20, nullptr );
+	BST::Insert( No5, No20 );
+	BST::Insert( No3, No20 );
+	BST::Insert( No50, No20 );
+	BST::Insert( No15, No20 );
+	BST::Insert( No10, No20 );
+	BST::Insert( No17, No20 );
+	BST::Insert( No30, No20 );
+	BST::Insert( No40, No20 );
 
 	/*
-	bst->Insert( No3 );
-	bst->Insert( No15 );
-	bst->Insert( No17 );
-	bst->Insert( No30 );
-	bst->Insert( No40 );
+	BST::Insert( No3 );
+	BST::Insert( No15 );
+	BST::Insert( No17 );
+	BST::Insert( No30 );
+	BST::Insert( No40 );
 	*/
 
 	LOG_INFO(" InorderTraversal ");
-	bst->InorderTraversal( No20, &(bst->Print) );
+
+	BST::InorderTraversal( No20, &BST::Print );
 
 	LOG_INFO(" PreorderTraversal ");
-	bst->PreorderTraversal( No20, &(bst->Print) );
+	BST::PreorderTraversal( No20, &BST::Print );
 
 	LOG_INFO(" PostorderTraversal ");
-	bst->PostorderTraversal( No20, &(bst->Print) );
+	BST::PostorderTraversal( No20, &BST::Print );
 
 	system("pause");
 	return 0;

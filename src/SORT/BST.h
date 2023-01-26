@@ -36,21 +36,20 @@ typedef enum TraversalType
 	POSTORDER
 }TraversalType;
 
-class BST
+namespace BST
 {
-	public :
-		void Insert( Node* ChildNode, Node* ParentNode );
-		void Delete( Node* node );
-		void Search( Node* node, TraversalType Type );
+	void Insert( Node* ChildNode, Node* ParentNode );
+	void Delete( Node* node );
+	void Search( Node* node, TraversalType Type );
 
-		void InorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
-		void PreorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
-		void PostorderTraversal( Node* node, void (*Action)( Node* Actionnode) );
+	void InorderTraversal( Node* node, void (*Action)( Node* ) );
+	void PreorderTraversal( Node* node, void (*Action)( Node* ) );
+	void PostorderTraversal( Node* node, void (*Action)( Node* ) );
 
-		Node* GetSuccesor( Node* node, Node* RootNode );
-		Node* GetPredecessor( Node* node, Node* RootNode );
+	Node* GetSuccesor( Node* node, Node* RootNode );
+	Node* GetPredecessor( Node* node, Node* RootNode );
 
-		void Print( Node* node );
+	void Print( Node* node );
 };
 
 #endif // __BST_H__
