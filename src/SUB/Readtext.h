@@ -27,7 +27,7 @@ namespace READTEXT
 	extern char FileName[ MAXLENGTH ];
 
 	void FileLoad( const char* FileAddress );
-	void FileRead();
+	void FileRead( FS::path Path );
 
 	void FileCopy( FS::path OriginPath, FS::path NewPath, int OriginFileHandling );
 	void FileMove( FS::path OriginPath, FS::path NewPath );
@@ -54,7 +54,7 @@ namespace READTEXT
 	void CreateAllDirectory( FS::path Path );
 
 	void PathGo2Up( FS::path& Path );
-	void PathGo2Down( FS::path& Path, char* DownPath );
+	void PathGo2Down( FS::path& Path, char* DownPath, bool Read );
 
 	char* GetFileName( const char* Path );
 }

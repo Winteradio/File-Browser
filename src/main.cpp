@@ -16,16 +16,18 @@ int main()
 	FS::path Path = FS::current_path();
 
 	bool Play = true;
+	char Name[ MAXLENGTH ];
+	FS::path TempPath;
 	while( Play )
 	{
 		READTEXT::PrintFilesinDirectory( Path );
-		LOG_INFO(" 0 : End ");
-		LOG_INFO(" 1 : Upper ");
-		LOG_INFO(" 2 : Down ");
+		LOG_INFO(" 0 : End Browser ");
+		LOG_INFO(" 1 : Up Directory ");
+		LOG_INFO(" 2 : Down Directory ");
+		LOG_INFO(" 3 : Read File ");
 		int Value;
 		printf(" Input Value ");
 		scanf("%d", &Value );
-
 
 		switch( Value )
 		{
@@ -36,15 +38,22 @@ int main()
 			READTEXT::PathGo2Up( Path );
 			break;
 		case 2:
-			char Name[ MAXLENGTH ];
 			printf(" Select File ");
 			scanf("%s", &Name );
-			READTEXT::PathGo2Down( Path, Name );
+			READTEXT::PathGo2Down( Path, Name, false );
+			break;
+		case 3:
+			printf(" Select File ");
+			scanf("%s", &Name );
+			TempPath= Path;
+			READTEXT::PathGo2Down( Path, Name, true );
+			READTEXT::FileRead( Path );
+			Path = TempPath;
 			break;
 		default :
 			break;
 		}
-		Sleep ( 500 );
+		Sleep ( 200 );
 	}
 
 

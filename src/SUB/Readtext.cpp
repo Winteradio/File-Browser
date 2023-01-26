@@ -1,8 +1,28 @@
 #include "Readtext.h"
+#include <fstream>
+#include <iostream>
 
 char READTEXT::FileName[ MAXLENGTH ] = "";
 
 void READTEXT::FileLoad( const char* FileAddress ){}
+
+void READTEXT::FileRead( FS::path Path )
+{
+	std::string Content;
+
+	std::ifstream File( Path.generic_string().c_str() );
+	system("cls");
+	LOG_INFO(" Start to Read File ");
+	LOG_INFO("");
+	while( std::getline( File, Content ) )
+	{
+		LOG_INFO("%s", Content.c_str() );
+		Sleep( 10 );
+	}
+	LOG_INFO("");
+	LOG_INFO(" End to Read File ");
+	Sleep( 500 );
+}
 
 void READTEXT::FileCopy( FS::path OriginPath, FS::path NewPath, int OriginFileHandling )
 {
@@ -136,7 +156,7 @@ void READTEXT::PrintFilesinDirectory( FS::path Path )
 		const FS::directory_entry& ENTRY = *ITR;
 		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
-		Sleep( 500 );
+		Sleep( 100 );
 	}
 }
 
@@ -150,7 +170,7 @@ void READTEXT::PrintAllFilesinDirectory( FS::path Path )
 		const FS::directory_entry& ENTRY = *ITR;
 		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
-		Sleep( 500 );
+		Sleep( 100 );
 	}
 }
 
@@ -191,7 +211,7 @@ void READTEXT::PathGo2Up( FS::path& Path )
 	Path = StrPath;
 }
 
-void READTEXT::PathGo2Down( FS::path& Path, char* DownPath )
+void READTEXT::PathGo2Down( FS::path& Path, char* DownPath, bool Read )
 {
 	std::string StrPath = Path.generic_string();
 	StrPath += "/";
@@ -203,7 +223,14 @@ void READTEXT::PathGo2Down( FS::path& Path, char* DownPath )
 		LOG_ERROR(" Error Path ");
 		break;
 	case FILEPATH :
-		LOG_INFO(" Select Other Path ");
+		if ( Read )
+		{
+			Path = StrPath;
+		}
+		else
+		{
+			LOG_INFO(" Select Other Path ");
+		}
 		break;
 	case DIRECTORYPATH :
 		Path = StrPath;
