@@ -1,0 +1,11 @@
+Problem
+    1. How to distribute program exe file
+        (1). Use Cloud PC 
+            - AWS
+            - Google
+            - Make my notebook to Cloud PC
+        (2). Use Jenkins
+        (3). Remake cmake that can install some program like compiler and library that make program file to run
+        (4). Make environment for program file in other computer
+
+   2. Make File Browser UI      
