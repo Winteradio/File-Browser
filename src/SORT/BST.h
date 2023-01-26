@@ -38,10 +38,8 @@ typedef enum TraversalType
 
 namespace BST
 {
-	extern Node* FoundNode;
 	extern Node* CompareNode;
-	extern Node* SuccessorNode;
-	extern Node* PredecessorNode;
+	extern Node* TempNode;
 
 	void NodeInit();
 

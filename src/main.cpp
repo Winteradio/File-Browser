@@ -25,6 +25,7 @@ int main()
 
 	BST::Insert( No20, nullptr );
 	BST::Insert( No5, No20 );
+	/*
 	BST::Insert( No3, No20 );
 	BST::Insert( No50, No20 );
 	BST::Insert( No15, No20 );
@@ -32,6 +33,7 @@ int main()
 	BST::Insert( No17, No20 );
 	BST::Insert( No30, No20 );
 	BST::Insert( No40, No20 );
+	*/
 
 	/*
 	BST::Insert( No3 );
@@ -41,6 +43,7 @@ int main()
 	BST::Insert( No40 );
 	*/
 
+	/*
 	LOG_INFO(" InorderTraversal ");
 
 	BST::InorderTraversal( No20, &BST::Print );
@@ -54,6 +57,10 @@ int main()
 	BST::GetSuccessor( No20, No20 );
 
 	BST::Search( No15, No20, INORDER );
+	*/
+
+	BST::Delete( No5, No20 );
+	BST::InorderTraversal( No20, &BST::Print );
 
 	system("pause");
 	return 0;

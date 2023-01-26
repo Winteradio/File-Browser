@@ -1,17 +1,13 @@
 #include "BST.h"
 #include <windows.h>
 
-Node* BST::FoundNode = nullptr;
 Node* BST::CompareNode = nullptr;
-Node* BST::SuccessorNode = nullptr;
-Node* BST::PredecessorNode = nullptr;
+Node* BST::TempNode = nullptr;
 
 void BST::NodeInit()
 {
-	FoundNode = nullptr;
 	CompareNode = nullptr;
-	SuccessorNode = nullptr;
-	PredecessorNode = nullptr;
+	TempNode = nullptr;
 }
 
 void BST::Insert( Node* ChildNode, Node* ParentNode )
@@ -45,7 +41,22 @@ void BST::Insert( Node* ChildNode, Node* ParentNode )
 
 void BST::Delete( Node* node, Node* RootNode )
 {
-	
+	Search( node, RootNode, INORDER );
+
+	if ( node->LeftChild != nullptr && node->RightChild != nullptr )
+	{
+
+	}
+	else if ( node->LeftChild == nullptr && node->RightChild == nullptr )
+	{
+
+	}
+	else
+	{
+
+	}
+
+	LOG_INFO(" Delete Done ");
 }
 
 void BST::Search( Node* node, Node* RootNode, TraversalType Type )
@@ -118,10 +129,10 @@ void BST::GetSuccessor( Node* node, Node* RootNode )
 
 	InorderTraversal( RootNode, CompareSuccessor );
 
-	if ( SuccessorNode != nullptr )
+	if ( TempNode != nullptr )
 	{
 		LOG_INFO(" Successor ");
-		Print( SuccessorNode );
+		Print( TempNode );
 	}
 	else
 	{
@@ -137,10 +148,10 @@ void BST::GetPredecessor( Node* node, Node* RootNode )
 
 	InorderTraversal( RootNode, ComparePredecessor );
 
-	if ( PredecessorNode != nullptr )
+	if ( TempNode != nullptr )
 	{
 		LOG_INFO(" Predecessor ");
-		Print( PredecessorNode );
+		Print( TempNode );
 	}
 	else
 	{
@@ -160,18 +171,18 @@ void BST::CompareSuccessor( Node* node )
 {
 	if ( node->Value > CompareNode->Value )
 	{
-		if ( SuccessorNode != nullptr )
+		if ( TempNode != nullptr )
 		{
-			if ( node->Value < SuccessorNode->Value )
+			if ( node->Value < TempNode->Value )
 			{
-				SuccessorNode = node;
+				TempNode = node;
 				Print( node );
 				Sleep( 100 );
 			}
 		}
 		else
 		{
-			SuccessorNode = node;
+			TempNode = node;
 		}
 	}
 }
@@ -180,29 +191,29 @@ void BST::ComparePredecessor( Node* node )
 {
 	if ( node->Value < CompareNode->Value )
 	{
-		if ( PredecessorNode != nullptr )
+		if ( TempNode != nullptr )
 		{
-			if ( node->Value > PredecessorNode->Value )
+			if ( node->Value > TempNode->Value )
 			{
-				PredecessorNode = node;
+				TempNode = node;
 				Print( node );
 				Sleep( 100 );
 			}
 		}
 		else
 		{
-			PredecessorNode = node;
+			TempNode = node;
 		}
 	}
 }
 
 void BST::Find( Node* node )
 {
-	if ( CompareNode->Value == node->Value )
+	if ( CompareNode->Value == node->LeftChild->Value || CompareNode->Value == node->RightChild->Value )
 	{
 		LOG_INFO(" Found Node ");
-		Print( node );
+		Print( CompareNode );
 		Sleep( 100 );
-		FoundNode = node;
+		TempNode = node;
 	}
 }
