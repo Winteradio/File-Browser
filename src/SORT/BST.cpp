@@ -1,6 +1,17 @@
 #include "BST.h"
 #include <windows.h>
 
+Node* BST::CompareNode = nullptr;
+Node* BST::SuccessorNode = nullptr;
+Node* BST::PredecessorNode = nullptr;
+
+void BST::NodeInit()
+{
+	CompareNode = nullptr;
+	SuccessorNode = nullptr;
+	PredecessorNode = nullptr;
+}
+
 void BST::Insert( Node* ChildNode, Node* ParentNode )
 {
 	if ( ParentNode != nullptr )
@@ -95,24 +106,86 @@ void BST::PostorderTraversal( Node* node, void (*Action)( Node* ) )
 	Action( node );
 }
 
-Node* BST::GetSuccesor( Node* node, Node* RootNode )
+void BST::GetSuccessor( Node* node, Node* RootNode )
 {
-	Node* Succesor;
+	CompareNode = node;
 
+	InorderTraversal( RootNode, CompareSuccessor );
 
+	if ( SuccessorNode != nullptr )
+	{
+		LOG_INFO(" Successor ");
+		Print( SuccessorNode );
+	}
+	else
+	{
+		LOG_INFO(" No Successor ");
+	}
 
-	return Succesor;
+	NodeInit();
 }
 
-Node* BST::GetPredecessor( Node* node, Node* RootNode )
+void BST::GetPredecessor( Node* node, Node* RootNode )
 {
-	Node* Predecessor;
+	CompareNode = node;
 
-	return Predecessor;
+	InorderTraversal( RootNode, ComparePredecessor );
+
+	if ( PredecessorNode != nullptr )
+	{
+		LOG_INFO(" Predecessor ");
+		Print( PredecessorNode );
+	}
+	else
+	{
+		LOG_INFO(" No Predecessor ");
+	}
+
+	NodeInit();
 }
 
 void BST::Print( Node* node )
 {
 	LOG_INFO(" %d ", node->Value );
 	Sleep( 100 );
+}
+
+void BST::CompareSuccessor( Node* node )
+{
+	if ( node->Value > CompareNode->Value )
+	{
+		if ( SuccessorNode != nullptr )
+		{
+			if ( node->Value <= SuccessorNode->Value )
+			{
+				SuccessorNode = node;
+				Print( node );
+				Sleep( 100 );
+			}
+		}
+		else
+		{
+			SuccessorNode = node;
+		}
+	}
+}
+
+void BST::ComparePredecessor( Node* node )
+{
+	if ( node->Value < CompareNode->Value )
+	{
+		if ( PredecessorNode != nullptr )
+		{
+			if ( node->Value >= PredecessorNode->Value )
+			{
+				PredecessorNode = node;
+				Print( node );
+				Sleep( 100 );
+			}
+		}
+		else
+		{
+			PredecessorNode = node;
+		}
+	}
 }

@@ -51,6 +51,8 @@ int main()
 	LOG_INFO(" PostorderTraversal ");
 	BST::PostorderTraversal( No20, &BST::Print );
 
+	BST::GetSuccessor( No20, No20 );
+
 	system("pause");
 	return 0;
 }
