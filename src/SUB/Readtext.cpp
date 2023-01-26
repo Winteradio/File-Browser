@@ -1,5 +1,7 @@
 #include "Readtext.h"
 
+char READTEXT::FileName[ MAXLENGTH ] = "";
+
 void READTEXT::FileLoad( const char* FileAddress ){}
 
 void READTEXT::FileCopy( FS::path OriginPath, FS::path NewPath, int OriginFileHandling )
@@ -60,19 +62,25 @@ bool READTEXT::CheckExisted( FS::path Path )
 	}
 }
 
-void READTEXT::CheckFileType( FS::path Path )
+PATHTYPE READTEXT::CheckPathType( FS::path Path )
 {
 	if ( FS::is_regular_file( Path ) )
 	{
-		LOG_INFO(" %s is file ", Path.generic_string().c_str() );
+		LOG_INFO(" %s is file ", GetFileName( Path.generic_string().c_str() ) );
+		return FILEPATH;
 	}
 	else if ( FS::is_directory( Path ) )
 	{
-		LOG_INFO(" %s is directory ", Path.generic_string().c_str() );
+		LOG_INFO(" %s is directory ", GetFileName( Path.generic_string().c_str() ) );
+		return DIRECTORYPATH;
+	}
+	else
+	{
+		return NULLPATH;
 	}
 }
 
-void READTEXT::CheckType( FS::path Path )
+void READTEXT::CheckFileType( FS::path Path )
 {
 
 }
@@ -124,7 +132,7 @@ void READTEXT::PrintFilesinDirectory( FS::path Path )
 	while ( ITR != FS::end( ITR ) )
 	{
 		const FS::directory_entry& ENTRY = *ITR;
-		LOG_INFO(" Path: %s", ENTRY.path().generic_string().c_str() );
+		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
 		Sleep( 300 );
 	}
@@ -137,7 +145,7 @@ void READTEXT::PrintAllFilesinDirectory( FS::path Path )
 	while ( ITR != FS::end( ITR ) )
 	{
 		const FS::directory_entry& ENTRY = *ITR;
-		LOG_INFO(" Path: %s", ENTRY.path().generic_string().c_str() );
+		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
 		Sleep( 300 );
 	}
@@ -178,9 +186,38 @@ void READTEXT::PathGo2Up( FS::path& Path )
 	Path = StrPath;
 }
 
-void READTEXT::PathGo2Down( FS::path& Path )
+void READTEXT::PathGo2Down( FS::path& Path, char* DownPath )
 {
 	std::string StrPath = Path.generic_string();
-	StrPath += "/";
-	Path = StrPath;
+	StrPath += "";
+	StrPath += DownPath;
+	if ( CheckPathType( (FS::path)StrPath) == DIRECTORYPATH )
+	{
+		Path = StrPath;
+	}
+	else if ( CheckPathType( (FS::path)StrPath ) == FILEPATH )
+	{
+		LOG_INFO(" Select Other Path ");
+	}
+	else
+	{
+		LOG_ERROR(" Error Path ");
+	}
+}
+
+char* READTEXT::GetFileName( const char* Path )
+{
+	const char* ptr = NULL;
+
+	ptr = strrchr( Path, '/' );
+
+	if ( ptr == NULL )
+	{
+		strcpy( FileName, Path );
+	}
+	else
+	{
+		strcpy( FileName, ptr + 1 );
+	}
+	return FileName;
 }

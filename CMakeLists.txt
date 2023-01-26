@@ -45,7 +45,7 @@ SET( SRCS
 	${SORT_DIR}/Node.h
 	${SORT_DIR}/BST.h ${SORT_DIR}/BST.cpp
 
-	${SUB_DIR}/Log.h
+	${SUB_DIR}/Log.h ${SUB_DIR}/Log.cpp
 	${SUB_DIR}/Readtext.h ${SUB_DIR}/Readtext.cpp
 
 	)

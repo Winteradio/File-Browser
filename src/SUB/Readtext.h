@@ -1,6 +1,8 @@
 #ifndef __READTEXT_H__
 #define __READTEXT_H__
 
+#define MAXLENGTH 256
+
 #define ALL_ORIGIN_FILE 0
 #define SKIP_ORIGIN_FILE 1
 #define OVERWRITE_ORIGIN_FILE 2
@@ -11,10 +13,19 @@
 #include <filesystem>
 #include <windows.h>
 
+typedef enum PATHTYPE
+{
+	NULLPATH,
+	FILEPATH,
+	DIRECTORYPATH
+}PATHTYPE;
+
 namespace FS = std::filesystem;
 
 namespace READTEXT
 {
+	extern char FileName[ MAXLENGTH ];
+
 	void FileLoad( const char* FileAddress );
 	void FileRead();
 
@@ -23,8 +34,8 @@ namespace READTEXT
 	void FileDelete( FS::path Path );
 
 	bool CheckExisted( FS::path Path );
+	PATHTYPE CheckPathType( FS::path Path );
 	void CheckFileType( FS::path Path );
-	void CheckType( FS::path Path );
 
 	void TypeWindow( FS::path Path );
 	void TypeObject( FS::path Path );
@@ -43,7 +54,9 @@ namespace READTEXT
 	void CreateAllDirectory( FS::path Path );
 
 	void PathGo2Up( FS::path& Path );
-	void PathGo2Down( FS::path& Path );
+	void PathGo2Down( FS::path& Path, char* DownPath );
+
+	char* GetFileName( const char* Path );
 }
 
 #endif // __READTEXT_H__

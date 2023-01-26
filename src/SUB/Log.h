@@ -15,6 +15,15 @@
 #define LOG_TRACE(str, ...) LOG_print("TRACE", __FILENAME__, __FUNCTION__, __LINE__, str, ##__VA_ARGS__)
 #define LOG_ALL(str, ...) LOG_print("ALL", __FILENAME__, __FUNCTION__, __LINE__)printf(str, ##__VA_ARGS__, "\n")
 
+#define LOG_NONE 0
+#define LOG_LOW 1
+#define LOG_HIGH 2
+
+namespace LOG
+{
+	extern int LEVEL;
+};
+
 inline void LOG_print(const char* log_type,
 	const char* filename,
 	const char* funcname,
@@ -27,9 +36,18 @@ inline void LOG_print(const char* log_type,
 
 	va_list List;
 	va_start(List,str);
-	printf("%d:%d:%d ", time.tm_hour, time.tm_min, time.tm_sec );
-	printf("%s | ", log_type);
-	printf("FILE : %s / FUNC : %s / NUM : %d | ", filename, funcname, linenum);
+	if ( LOG::LEVEL >= LOG_NONE )
+	{
+		printf("%d:%d:%d ", time.tm_hour, time.tm_min, time.tm_sec );
+	}
+	else if ( LOG::LEVEL >= LOG_LOW )
+	{
+		printf("%s | ", log_type);
+	}
+	else if ( LOG::LEVEL == LOG_HIGH )
+	{
+		printf("FILE : %s / FUNC : %s / NUM : %d | ", filename, funcname, linenum);
+	}
 	vprintf(str,List);
 	va_end(List);
 	printf("\n");
