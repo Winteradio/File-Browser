@@ -13,7 +13,7 @@
 int main()
 {
 	LOG::LEVEL = LOG_LOW;
-	FS::path Path("./../../");
+	FS::path Path("./");
 
 	bool Play = true;
 	while( Play )
