@@ -12,8 +12,8 @@
 
 int main()
 {
-	LOG::LEVEL = LOG_LOW;
-	FS::path Path("./");
+	LOG::LEVEL = LOG_HIGH;
+	FS::path Path = FS::current_path();
 
 	bool Play = true;
 	while( Play )
@@ -41,8 +41,10 @@ int main()
 			scanf("%s", &Name );
 			READTEXT::PathGo2Down( Path, Name );
 			break;
+		default :
+			break;
 		}
-		Sleep ( 100 );
+		Sleep ( 500 );
 	}
 
 

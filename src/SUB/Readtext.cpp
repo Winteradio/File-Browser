@@ -76,6 +76,7 @@ PATHTYPE READTEXT::CheckPathType( FS::path Path )
 	}
 	else
 	{
+		LOG_INFO(" %s is NULL ", GetFileName( Path.generic_string().c_str() ) );
 		return NULLPATH;
 	}
 }
@@ -129,12 +130,13 @@ void READTEXT::PrintFilesinDirectory( FS::path Path )
 {
 	FS::directory_iterator ITR( Path );
 
+	LOG_INFO(" Main Path : %s ", Path.generic_string().c_str() );
 	while ( ITR != FS::end( ITR ) )
 	{
 		const FS::directory_entry& ENTRY = *ITR;
 		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
-		Sleep( 300 );
+		Sleep( 500 );
 	}
 }
 
@@ -142,12 +144,13 @@ void READTEXT::PrintAllFilesinDirectory( FS::path Path )
 {
 	FS::recursive_directory_iterator ITR( Path );
 
+	LOG_INFO(" Main Path : %s ", Path.generic_string().c_str() );
 	while ( ITR != FS::end( ITR ) )
 	{
 		const FS::directory_entry& ENTRY = *ITR;
 		LOG_INFO(" Path: %s", GetFileName( ENTRY.path().generic_string().c_str() ) );
 		ITR++;
-		Sleep( 300 );
+		Sleep( 500 );
 	}
 }
 
@@ -182,26 +185,31 @@ void READTEXT::CreateAllDirectory( FS::path Path )
 void READTEXT::PathGo2Up( FS::path& Path )
 {
 	std::string StrPath = Path.generic_string();
-	StrPath += "./../";
+	std::string PathName = "/";
+	PathName += GetFileName( StrPath.c_str() );
+	StrPath.erase( StrPath.end() - PathName.length() , StrPath.end() );
 	Path = StrPath;
 }
 
 void READTEXT::PathGo2Down( FS::path& Path, char* DownPath )
 {
 	std::string StrPath = Path.generic_string();
-	StrPath += "";
+	StrPath += "/";
 	StrPath += DownPath;
-	if ( CheckPathType( (FS::path)StrPath) == DIRECTORYPATH )
+	PATHTYPE pathtype = CheckPathType( (FS::path)StrPath );
+	switch( pathtype )
 	{
-		Path = StrPath;
-	}
-	else if ( CheckPathType( (FS::path)StrPath ) == FILEPATH )
-	{
-		LOG_INFO(" Select Other Path ");
-	}
-	else
-	{
+	case NULLPATH :
 		LOG_ERROR(" Error Path ");
+		break;
+	case FILEPATH :
+		LOG_INFO(" Select Other Path ");
+		break;
+	case DIRECTORYPATH :
+		Path = StrPath;
+		break;
+	default :
+		break;
 	}
 }
 
