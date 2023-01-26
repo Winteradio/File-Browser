@@ -53,6 +53,8 @@ int main()
 
 	BST::GetSuccessor( No20, No20 );
 
+	BST::Search( No15, No20, INORDER );
+
 	system("pause");
 	return 0;
 }

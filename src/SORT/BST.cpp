@@ -1,12 +1,14 @@
 #include "BST.h"
 #include <windows.h>
 
+Node* BST::FoundNode = nullptr;
 Node* BST::CompareNode = nullptr;
 Node* BST::SuccessorNode = nullptr;
 Node* BST::PredecessorNode = nullptr;
 
 void BST::NodeInit()
 {
+	FoundNode = nullptr;
 	CompareNode = nullptr;
 	SuccessorNode = nullptr;
 	PredecessorNode = nullptr;
@@ -41,22 +43,26 @@ void BST::Insert( Node* ChildNode, Node* ParentNode )
 	}
 }
 
-void BST::Delete( Node* node )
+void BST::Delete( Node* node, Node* RootNode )
 {
 	
 }
 
-void BST::Search( Node* node, TraversalType Type )
+void BST::Search( Node* node, Node* RootNode, TraversalType Type )
 {
+	CompareNode = node;
 	switch( Type )
 	{
 		case INORDER :
+			InorderTraversal( RootNode, Find );
 		break;
 
 		case PREORDER :
+			PreorderTraversal( RootNode, Find );
 		break;
 
 		case POSTORDER :
+			PostorderTraversal( RootNode, Find );
 		break;
 	};
 }
@@ -187,5 +193,16 @@ void BST::ComparePredecessor( Node* node )
 		{
 			PredecessorNode = node;
 		}
+	}
+}
+
+void BST::Find( Node* node )
+{
+	if ( CompareNode->Value == node->Value )
+	{
+		LOG_INFO(" Found Node ");
+		Print( node );
+		Sleep( 100 );
+		FoundNode = node;
 	}
 }

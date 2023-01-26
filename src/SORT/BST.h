@@ -38,6 +38,7 @@ typedef enum TraversalType
 
 namespace BST
 {
+	extern Node* FoundNode;
 	extern Node* CompareNode;
 	extern Node* SuccessorNode;
 	extern Node* PredecessorNode;
@@ -45,8 +46,8 @@ namespace BST
 	void NodeInit();
 
 	void Insert( Node* ChildNode, Node* ParentNode );
-	void Delete( Node* node );
-	void Search( Node* node, TraversalType Type );
+	void Delete( Node* node, Node* RootNode );
+	void Search( Node* node, Node* RootNode, TraversalType Type );
 
 	void InorderTraversal( Node* node, void (*Action)( Node* ) );
 	void PreorderTraversal( Node* node, void (*Action)( Node* ) );
@@ -59,6 +60,8 @@ namespace BST
 
 	void CompareSuccessor( Node* node );
 	void ComparePredecessor( Node* node );
+
+	void Find( Node* node );
 };
 
 #endif // __BST_H__
